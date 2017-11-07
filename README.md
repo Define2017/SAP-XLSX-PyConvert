@@ -12,19 +12,19 @@ The script can be executed with the following command line parameters.
 
 *Optional arguments:*
 
-#####-h, Show this help message and exit
+##### -h, Show this help message and exit
   
-#####-v, Show program's version number and exit
+##### -v, Show program's version number and exit
   
-#####-f, Convert single file to CSV
+##### -f, Convert single file to CSV
   
 *Mandatory arguments:*
 
-#####-l, This is the folder path for the rotating log file
+##### -l, This is the folder path for the rotating log file
 
-#####-s, Source folder of XLSX files
+##### -s, Source folder of XLSX files
 
-#####-d, Archive / Destination folder for original XLSX file
+##### -d, Archive / Destination folder for original XLSX file
 
 
 
