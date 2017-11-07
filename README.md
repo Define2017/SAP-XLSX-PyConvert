@@ -11,6 +11,7 @@ There is various methods to read XLSX files into ABAP, but due to the various ve
 The script can be executed with the following command line parameters.
 
 Optional arguments:
+
   -h, Show this help message and exit
   
   -v, Show program's version number and exit
@@ -18,6 +19,7 @@ Optional arguments:
   -f, Convert single file to CSV
   
 Mandatory arguments:
+
   -l, This is the folder path for the rotating log file
 
   -s, Source folder of XLSX files
@@ -27,19 +29,23 @@ Mandatory arguments:
 Example Usage of Script
 
 **This command will display all of the help associated the program**
+
 python xlsx_convert.py -h
 
 
 **This command will display the version of the script**
+
 python xlsx_convert.py -v
 
 
 **This usage will execute the script and convert all files in the -s '/SAP-XLSX-PyConvert/Source/' folder, write all log messages to file 'xls_conv.log' in the -l '/SAP-XLSX-PyConvert/Log_Folder/' folder and move the orginal XLSX files to the -d '/SAP-XLSX-PyConvert/Archive/' folder.**
+
 python xlsx_convert.py -l '/SAP-XLSX-PyConvert/Log_Folder/' -s '/SAP-XLSX-PyConvert/Source/' -d '/SAP-XLSX-PyConvert/Archive/'
 
 
 **Please Note: This will be enabled as part of version 1.2 of the script**
 This usage will execute the script and convert a single file using the -f 'VafBM_20161021.xlsx' in the -s '/SAP-XLSX-PyConvert/Source/' folder, write all log messages to file 'xls_conv.log' in the -l '/SAP-XLSX-PyConvert/Log_Folder/' folder and move the orginal XLSX files to the -d '/SAP-XLSX-PyConvert/Archive/' folder.
+
 python xlsx_convert.py -l '/SAP-XLSX-PyConvert/Log_Folder/' -s '/SAP-XLSX-PyConvert/Source/' -d '/SAP-XLSX-PyConvert/Archive/' -f 'VafBM_20161021.xlsx'
 
 # Runtime Environment 
