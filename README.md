@@ -10,7 +10,7 @@ There is various methods to read XLSX files into ABAP, but due to the various ve
 # Usage of the script
 The script can be executed with the following command line parameters.
 
-Optional arguments:
+*Optional arguments:*
 
   -h, Show this help message and exit
   
@@ -18,7 +18,7 @@ Optional arguments:
   
   -f, Convert single file to CSV
   
-Mandatory arguments:
+*Mandatory arguments:*
 
   -l, This is the folder path for the rotating log file
 
@@ -26,7 +26,9 @@ Mandatory arguments:
 
   -d, Archive / Destination folder for original XLSX file
 
-Example Usage of Script
+
+
+**Example Usage of Script**
 
 **This command will display all of the help associated the program**
 
@@ -44,6 +46,7 @@ python xlsx_convert.py -l '/SAP-XLSX-PyConvert/Log_Folder/' -s '/SAP-XLSX-PyConv
 
 
 **Please Note: This will be enabled as part of version 1.2 of the script**
+
 This usage will execute the script and convert a single file using the -f 'VafBM_20161021.xlsx' in the -s '/SAP-XLSX-PyConvert/Source/' folder, write all log messages to file 'xls_conv.log' in the -l '/SAP-XLSX-PyConvert/Log_Folder/' folder and move the orginal XLSX files to the -d '/SAP-XLSX-PyConvert/Archive/' folder.
 
 python xlsx_convert.py -l '/SAP-XLSX-PyConvert/Log_Folder/' -s '/SAP-XLSX-PyConvert/Source/' -d '/SAP-XLSX-PyConvert/Archive/' -f 'VafBM_20161021.xlsx'
@@ -56,6 +59,7 @@ This script was developed and tested with the following runtime environment(s):
 * Mac OS Sierra - 10.12.6
 
 **SAP Application Server Environment**
+
 SUSE Enterprise Linux 
 
 * Linux version 3.0.101-107-default
@@ -117,8 +121,9 @@ SAP Application Environment Information
 
 # ABAP Usage  
 There is several ways in which to call the python script, the easiest way is to wrap it in a function module / class and then call it in your report program.
-For the purposes of this project, it has been wrapped in a function module and in the main ABAP Program, the function module is called which passes the parameters to the python script.
 
+For the purposes of this project, it has been wrapped in a function module and in the main ABAP Program, the function module is called which passes the parameters to the python script.
+`
 *DATA IV_SRC_FOLDER TYPE CHAR0064.
 *DATA IV_LOG_FOLDER TYPE CHAR0064.
 *DATA IV_DST_FOLDER TYPE CHAR0064.
@@ -128,3 +133,4 @@ CALL FUNCTION 'Z_XLS_CONV'
     iv_src_folder       = '/usr/sap/SAPBW/intf/in/'
     iv_log_folder       = '/usr/sap/SAPBW/intf/in/'
     iv_dst_folder       = '/usr/sap/SAPBW/intf/out/'.
+`
