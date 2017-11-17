@@ -5,7 +5,7 @@ This project was bourne of the need to convert XLSX Files to CSV for processing 
 There is various methods to read XLSX files into ABAP, but due to the various version restrictions and  limitations on the SAP Netweaver platform, this solution was choosen, in which to use python to read and convert XLSX files.
 
 # Known Issues / Limitations
-
+The current script will only do a basic conversion of the Microsoft Excel file, meaning that it will simply read and convert. I fyou have any objects such as pivot tables, charts, etc. You need to amend the script accodingly to apply your own logic.
 
 # Usage of the script
 The script can be executed with the following command line parameters.
@@ -71,54 +71,8 @@ SUSE Enterprise Linux
 * SAP Netweaver 7.40 SP 13
 * Python version -  2.6.9
 
-The script was developed using the following libraries versions:
-* BaseHTTPServer 0.3
-* SimpleHTTPServer 0.6
-* SocketServer 0.4
-* _csv 1.0
-* _ctypes 1.1.0
-* _elementtree 1.0.6
-* _struct 0.2
-* cgi 2.6
-* csv 1.0
-* ctypes 1.1.0
-* decimal 1.70
-* distutils 2.7.10
-* email 4.0.3
-* et_xmlfile 1.0.1
-* jdcal 1.2
-* json 2.0.9
-* logging 0.5.1.2
-* openpyxl 2.3.4
-* parser 0.5
-* pickle $Revision: 72223 $
-* pkg_resources._vendor.packaging 15.3
-* pkg_resources._vendor.packaging.__about__ 15.3
-* platform 1.0.7
-* pyexpat 2.7.10
-* re 2.2.1
-* setuptools 18.5
-* setuptools.version 18.5
-* urllib 1.17
-* urllib2 2.7
-* xml.parsers.expat $Revision: 17640 $
-* zlib 1.0
+[For more detailed runtime information](https://github.com/jacintod/SAP-XLSX-PyConvert/wiki/Requirements-and-Versioning) 
 
-# ABAP Information 
-The following application components were in use for the development and deployment of the script
-SAP Application Environment Information
-* SAP_BASIS	740	0013 - SAP Basis Component
-* SAP_ABA	740	0013 - Cross-Application Component
-* SAP_GWFND	740	0013 - SAP Gateway Foundation 7.40
-* SAP_UI	740	0015 - User Interface Technology 7.40
-* PI_BASIS	740	0013 - Basis Plug-In
-* ST-PI	740	0006 - SAP Solution Tools Plug-In
-* BI_CONT	747	0015 - Business Intelligence Content
-* SAP_BW	740	0013 - SAP Business Warehouse
-* GRCPINW	V1100_731 - SAP GRC NetWeaver Plug-In
-* DMIS	2011_1_731 - DMIS 2011_1
-* SAS	930	0000	-	SAS/ACCESS Interface to R/3
-* ST-A/PI	01S_731	0002 - Servicetools for SAP Basis 731
 
 # ABAP Usage  
 There is several ways in which to call the python script, the easiest way is to wrap it in a function module / class and then call it in your report program.
