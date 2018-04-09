@@ -5,7 +5,7 @@ This project was bourne of the need to convert XLSX Files to CSV for processing 
 There is various methods to read XLSX files into ABAP, but due to the various version restrictions and  limitations on the SAP Netweaver platform, this solution was choosen, in which to use python to read and convert XLSX files.
 
 # Known Issues / Limitations
-The current script will only do a basic conversion of the Microsoft Excel file, meaning that it will simply read and convert. I fyou have any objects such as pivot tables, charts, etc. You need to amend the script accodingly to apply your own logic.
+The current script will only do a basic conversion of the Microsoft Excel file, meaning that it will simply read and convert. If you have any objects such as pivot tables, charts, etc. You need to amend the script accodingly to apply your own logic.
 
 # Usage of the script
 The script can be executed with the following command line parameters.
@@ -16,8 +16,6 @@ The script can be executed with the following command line parameters.
   
 ##### -v, Show program's version number and exit
   
-##### -f, Convert single file to CSV
-  
 *Mandatory arguments:*
 
 ##### -l, This is the folder path for the rotating log file
@@ -25,8 +23,6 @@ The script can be executed with the following command line parameters.
 ##### -s, Source folder of XLSX files
 
 ##### -d, Archive / Destination folder for original XLSX file
-
-
 
 
 # Example Usage of Script
@@ -39,18 +35,6 @@ python xlsx_convert.py -h
 **This command will display the version of the script**
 
 python xlsx_convert.py -v
-
-
-**This usage will execute the script and convert all files in the -s '/SAP-XLSX-PyConvert/Source/' folder, write all log messages to file 'xls_conv.log' in the -l '/SAP-XLSX-PyConvert/Log_Folder/' folder and move the orginal XLSX files to the -d '/SAP-XLSX-PyConvert/Archive/' folder.**
-
-python xlsx_convert.py -l '/SAP-XLSX-PyConvert/Log_Folder/' -s '/SAP-XLSX-PyConvert/Source/' -d '/SAP-XLSX-PyConvert/Archive/'
-
-
-**Please Note: This will be enabled as part of version 1.2 of the script**
-
-This usage will execute the script and convert a single file using the -f 'VafBM_20161021.xlsx' in the -s '/SAP-XLSX-PyConvert/Source/' folder, write all log messages to file 'xls_conv.log' in the -l '/SAP-XLSX-PyConvert/Log_Folder/' folder and move the orginal XLSX files to the -d '/SAP-XLSX-PyConvert/Archive/' folder.
-
-python xlsx_convert.py -l '/SAP-XLSX-PyConvert/Log_Folder/' -s '/SAP-XLSX-PyConvert/Source/' -d '/SAP-XLSX-PyConvert/Archive/' -f 'VafBM_20161021.xlsx'
 
 # Runtime Environment 
 This script was developed and tested with the following runtime environment(s):
@@ -76,8 +60,8 @@ SUSE Enterprise Linux
 
 # ABAP Usage  
 There is several ways in which to call the python script, the easiest way is to wrap it in a function module / class and then call it in your report program.
+Below is an example of a function module which can be used in order to call the python script 
 
-For the purposes of this project, it has been wrapped in a function module and in the main ABAP Program, the function module is called which passes the parameters to the python script.
 
 ```ABAP
 *DATA IV_SRC_FOLDER TYPE CHAR0064.
@@ -89,4 +73,42 @@ CALL FUNCTION 'Z_XLS_CONV'
     iv_src_folder       = '/usr/sap/SAPBW/intf/in/'
     iv_log_folder       = '/usr/sap/SAPBW/intf/in/'
     iv_dst_folder       = '/usr/sap/SAPBW/intf/out/'.
+```
+
+
+For the purposes of this project, it has been called in a function module from the secure script framework and incorporated in the main ABAP Program, the function module is called which passes the parameters to the python script.
+
+
+```ABAP
+	
+*DATA IV_SCRIPT_NAME TYPE CHAR0032.
+*DATA IV_TARGET_HOST TYPE RFCDISPLAY-RFCHOST.
+*DATA EV_STATUS      TYPE EXTCMDEXEX-STATUS.
+*DATA EV_EXIT_CODE   TYPE EXTCMDEXEX-EXITCODE.
+*DATA ET_CMD_OUTPUT  TYPE ZTT_BTCXPM.
+
+TRY.
+		CALL FUNCTION 'Z_SECURE_SCRIPT_EXECUTE'
+		  EXPORTING
+		    iv_script_name                      = iv_script_name
+		*   IV_TARGET_HOST                      = IV_TARGET_HOST
+		* IMPORTING
+		*   EV_STATUS                           = EV_STATUS
+		*   EV_EXIT_CODE                        = EV_EXIT_CODE
+		*   ET_CMD_OUTPUT                       = ET_CMD_OUTPUT
+		* EXCEPTIONS
+		*   NO_PERMISSION                       = 1
+		*   EXECUTION_SCRIPT_NOT_FOUND          = 2
+		*   INVALID_HASH_SCRIPT                 = 3
+		*   INVALID_HASH_SHELL_EXE_SCRIPT       = 4
+		*   MISSING_SCRIPT_NAME                 = 5
+		*   ERROR_EXECUTING_SCRIPT              = 6
+		*   OTHERS                              = 7
+	          .
+    CATCH cx_root INTO oref.
+  ENDTRY. 
+       
+IF sy-subrc <> 0.
+* Implement suitable error handling here
+ENDIF.
 ```
